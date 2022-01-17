@@ -1,0 +1,86 @@
+CATATAN:
+menampilakn data tabel : desc (nama tabel);
+menampilkan isi tabel : select * from (nama tabel);
+menghapus isi tabel : DELETE FROM (nama tabel);
+menghapus tabel : drop table (nama tabel);
+membuat tabel : create (nama table);
+menghapus database : drop database (nama database);
+menambahkan tabel : ALTER TABLE profile ADD email VARCHAR(50) NOT NULL;
+mengambil  satu kolom : select (nama kolom) from (nama table);
+mengambil lebih dari satu kolom: select (nama kolom),(nama kolom) from (nama table);
+
+select kode_pelanggan,qty,harga,qty*harga as total from penjualan where qty*harga >= 100000;
+alter table tiket add kode_film char(5) not null foreign key (kode_film) references film (id_film));
+ADD
+Option add ini digunakan untuk menambahkan field atau kolom baru pada tabel.
+ADD INDEX
+Add index digunakan untuk menambahkan index baru pada field atau kolom di di tabel.
+ADD PRIMARY KEY
+Apabila sebuah tabel yang anda buat belum memiliki primary key anda dapat menggunakan perintah add primary key pada alter.
+CHANGE
+Opsi change dapat digunakan untuk mengubah field atau kolom menjadi field baru.
+MODIFY
+Digunakan untuk mengubah suatu field menjadi field baru.
+DROP
+Perintah drop digunakan untuk menghapus field atau kolom pada tabel database mysql.
+RENAME TO
+Digunakan untuk mengubah nama tabel.
+
+insert into ruang_bioskop values  ("RB001","THE NUN","13:00 – 15:00 "),("RB002","JUMANJI","12:00 – 13:45 "),("RB003","WARKOP DKI REBORN","14:00 – 16:00 "),("RB004","THE FAST FURIOUS","17:00 – 19.30 "),("RB005","UPIN & IPIN THE MOVIE","20:00 – 21:45 
+insert into studio values ('RB001','13:00 - 15:00','RUANG 12'),('RB002','15:00 - 17:00','RUANG 13'),('RB003','17:00 - 19:00','RUANG 14'),('RB004','20:00 - 21:40','RUANG 15'),('RB005','22:00 - 23:30','RUANG 16');
+
+select * from studio;
+delete from studio;
+alter table studio modify jam_tayamg datetime;
+
+insert into penonton values ('IP001','RB003','Rival carrera'), ('IP002','RB004','leydia azzahra'),('IP003','RB001','asep surasep'),('IP004','RB005','arland maulana'),('IP005','RB002','adi fakhri');
+insert into film values ('IF001','THE NUN'),('IF002','JUMANJI'),('IF003','WARKOP DKI REBORN'),('IF004','THE FAST AND FURIOUS'),('IF005','UPIN DAN IPIN THE MOVIE');
+insert into kursi values ('1','1D'),('2','3D'),('4','2D'),('3','4A'),('5','1F');
+insert into kasir values ('GSM001','50.000'),('GSM002','70.000'),('GSM003','100.000'),('CTR001','125.000'),('CTR002','150.000');
+insert into tiket values ('CTR001','4','ff123','2'),('CTR002','3','ss321','1'),('GSM001','2','dd332','1'),('GSM002','1','ddd22','2'),('GSM003','2','F1222','1');
+insert into memesan values ('IP001','GSM001','4'),('IP002','GSM002','3'),('IP003','GSM003','2'),('IP004','CTR001','1'),('IP005','CTR002','2');
+
+kode_transaksi char (6) not null,
+kode_kursi char (1) not null,
+kode_film char (5) not null,
+no_seri char (5),
+jml_tiket int,
+primary key(kode_transaksi,kode_kursi,kode_film),
+foreign key (kode_transaksi) references kasir (no_transaksi),
+foreign key (kode_kursi) references kursi (id_kursi),
+foreign key (kode_film) references film (id_film));
+insert into tiket values ('CTR001','4','IF004','ff123','1'),('CTR002','3','IF005','ss321','1'),('GSM001','2','IF002','dd332','1'),('GSM002','1','IF003','ddd22','1'),('GSM003','2','IF001','F1222','1');
+insert into mart values ('1','jkt-001','cust0001','Musthafa hanif','pondok cipta no 30m blok c');
+insert into penjualan values ('cust0007','5','62000');
+
+mengambil 1 kolom saja : select nama kolom fromm nama tabel;
+mengambil 2 kolom : select nama kolom 1 ,nama kolom2 from nama tabel;
+MEMBATASI PENGAMBILAN KOLOM:select nama kolom fromm nama tabel LIMIT N;
+SELECT DISTINCT NAMA KOLOM1,NAMA KOLOM2,
+select * from ms_produk where nama_produk = "flaskdisk dqlab 64gb" or nama_produk = "kotak pensil dqlab";
+select * from ms_produk where nama_produk = 'buku planner agenda dqlab' and harga < 100000;
+
+
+
+select qty, harga, qty*harga as total, sum() as revenue from tr_penjualan group by qty;
+select kode_transaksi, kode_pelanggan, no_urut, kode_prod,qty,harga, qty*harga as total_produk_terjual from tr_penjualan;
+select kode_prod, count(distinct qty) as total_order,sum(harga) as total_price from tr_penjualan group by kode_prod;
+select qty*harga as total from tr_penjualan;
+select kode_prod, sum(qty) as qty, sum(harga) as total from tr_penjualan;
+select kode_pelanggan, qty,harga, qty*harga as total, 
+case 
+when qty*harga > 300000 then 'high' 
+when qty*harga < 100000 then 'low' else 'medium' 
+end as kategori 
+from tr_penjualan;
+select sum(qty) * harga as total_penjualann from tr_penjualan;
+select kode_prod, sum(qty) as qty, sum(harga) as harga from tr_penjualan group by kode_prod;
+select kode_pelanggan, avg(qty*harga) as total 
+from tr_penjualan group by kode_pelanggan;
+select EXP(qty) as EXP from tr_penjualan;
+select no_urut, concat(kode_cabang,kode_pelanggan) as cabang_pelanggan, nama_pelanggan, alamat from ms_pelanggan;
+select substr(nama_pelanggan,1,4) as initial from ms_pelanggan;
+select no_urut, nama_pelanggan, length(nama_pelanggan) as total_char from ms_pelanggan;
+select no_urut, replace(nama_produk,'DQLab','MUS') as nama_baru from ms_produk;
+select no_urut, upper(nama_pelanggan) as UPPER_NAMA, lower(alamat) as LOWER_ALAMAT from ms_pelanggan;
+select kode_cabang, kode_prod, sum(qty) as total from tr_penjualan group by kode_cabang, kode_prod;
